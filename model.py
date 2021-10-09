@@ -48,11 +48,14 @@ class User_Medications(db.Model):
     dosage = db.Column(db.String(200), nullable=False)
     frequency_per_day = db.Column(db.Integer, nullable=True)
 
+    user = db.relationship('Users' backref='user_medications')
+    medications = db.relationship('Medications' backref='user_medications')
+
     def __repr__(self):
         return f"<User_Medications user_medication_id={self.user_medication_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day}"
 
 
-class Reminder(db.Model):
+class Reminders(db.Model):
     """Various reminders for medications and refills"""
 
     __tablename__ = "reminders"
@@ -65,6 +68,12 @@ class Reminder(db.Model):
     scheduled_time = db.Column(db.DateTime(timezone=True))
     intake_alarm = db.Column(db.DateTime)
     refills = db.Column(db.Integer, nullable=True)
+
+    user_medications = db.relationship('User_Medications' backref='reminders')
+    medications = db.relationship('Medications' backref='reminders')
+
+     def __repr__(self):
+        return f"<Reminders reminders_id{self.reminders_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day} scheduled_date={self.scheduled_date} scheduled_time={self.scheduled_time} refills={self.refills}"
 
 
 """NEED TO DO - Pharmacy Information Table"""
@@ -87,3 +96,4 @@ if __name__ == "__main__":
 
     connect_to_db(app)
     db.create_all()
+
