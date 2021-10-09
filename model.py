@@ -36,20 +36,54 @@ class Medications(db.Model):
     def __repr__(self):
         return f"<Medications medication_id={self.medication_id} instructions={self.instructions} medication_allergies={self.medication_allergies}"
 
+
 class User_Medications(db.Model):
     """Create user medications for medications, dosage and frequency"""
 
     __tablename__ = "user_medications"
 
-    
+    user_medications_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.Foreignkey('users.user_id'))
+    medication_id = db.Column(db.Integer, db.Foreignkey('medications.medication_id'))
+    dosage = db.Column(db.String(200), nullable=False)
+    frequency_per_day = db.Column(db.Integer, nullable=True)
 
+    def __repr__(self):
+        return f"<User_Medications user_medication_id={self.user_medication_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day}"
+
+
+class Reminder(db.Model):
+    """Various reminders for medications and refills"""
+
+    __tablename__ = "reminders"
+
+    reminders_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_medications_id = db.Column(db.String, db.Foreignkey('user_medications.user_medications_id'))
+    medication_id = db.Column(db.Integer, db.Foreignkey('medications.medication_id'))
+    dosage = db.Column(db.String, db.Foreignkey('user_medications.user_medication_id'))
+    scheduled_date = db.Column(db.DateTime)
+    scheduled_time = db.Column(db.DateTime(timezone=True))
+    intake_alarm = db.Column(db.DateTime)
+    refills = db.Column(db.Integer, nullable=True)
+
+
+"""NEED TO DO - Pharmacy Information Table"""
+
+"""Need to finish this part"""
+def connect_to_db(app)
+    """Connect to the database flask app"""
+
+    db.app = flask_app
+    db.init_app(flask_app)
+
+    print("Connected to the db")
+    
 
 if __name__ == "__main__":
     from server import app
 
-    # Call connect_to_db(app, echo=False) if your program output gets
-    # too annoying; this will tell SQLAlchemy not to print out every
-    # query it executes.
+    from flask import flask
+    app = Flask(__name__)
 
     connect_to_db(app)
     db.create_all()
