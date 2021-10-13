@@ -8,6 +8,7 @@ session
 request
 from model import db, connect_to_db
 from datetime import datetime 
+from datetime import timedelta
 
 import model
 
@@ -20,7 +21,7 @@ def homepage():
 
 @app.route("/register")
 def register():
-    """Registration from"""
+    """Registration form"""
 
     return render_template("registration.html")
 
@@ -95,12 +96,34 @@ def submission():
 
     for new_time in frequency_per_day:
         scheduled_time = datetime.strptime(new_time, "%H:%M:%S")
-        new_frequency = Reminders(user=user_id, scheduled_time=scheduled_time,  )
+        new_frequency = Reminders(user=user_id, scheduled_time=scheduled_time, new_medications=new_medication.medications.id)
 
-""""" look over medications route""""
+        db.session.add(new_frequency)
+        db.session.commit()
+    
+    flash("Medication has been added")
+    return redirecr("/")
 
+//NEED TO FIX - Complete medication plan
 @app.route("/medication_plan", methods=["GET"])
+def user_meds():
+"""User medications that they are currently taking"""
 
+
+def reminders(user_id)
+"""User reminders for taking medications"""
+
+    current_date = datetime.now()
+    med_hour = current_date + timedelta(hours=1)
+    med_hour = med_hour.time()
+    current_date = current_date.time()
+
+    for medications in medication_plan:
+        user_medications = Reminders.query.filter_by(medications_id=medications.medications_id).all()
+            if current_date <= reminders.timestamp and reminders.timestamp <= med_hour:
+                message = "REMINDER {first_name": time to take {user_medication_id}."
+                flash(message)
+                return message
 
 
 
