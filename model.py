@@ -2,6 +2,7 @@
 
 from flask_sqlalchemy import SQLAlcemy
 from datetime import datetime
+from datetime import timedelta
 
 db = SQLAlchemy()
 

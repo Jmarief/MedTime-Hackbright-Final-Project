@@ -1,13 +1,45 @@
 {% extends 'base.html' %}
 
-{% block title %}Registration page{% endblock %} 
+{% block header %}
+
+    <h1>{% block title %}Registration{% endblock %}</h1>
+{% endblock %}
 
 {% block content %}
 
+    <h2>Never forget to take your medications</h2>
+
 <form action="/register" method="POST">
 
-</form>
+    <div class="form-group">
+     <lable for="f_name">First name:
+         <input class="form-control" type="text" id="f_name" name="f_name" placeholder="Enter your first name here">
+     </lable>
+     </div>
+     <div class="form-group">
+         <lable for="l_name">Last name:
+             <input class="form-control" type="text" id="l_name" name="l_name" placeholder="Enter your last name here">
+         </lable>
+     </div>
+     <div class="form-group">
+         <lable for="email">Email:
+             <input class="form-control" type="text" id="email" name="email" placeholder="Enter your email, this will also be your username">
+         </lable>
+     </div>
+     <div class="form-group">
+         <lable for="password">Password:
+            <input class="form-control" type="text" id="password" name="password" placeholder="Enter a unique password">
+         </lable>
+     </div>
+     <div class="form-group">
+        <lable for="phone_number">Phone Number:
+           <input class="form-control" type="text" id="phone_number" name="phone_number" placeholder="Enter your phone number">
+        </lable>
+    </div>
 
+    <input type="Submit" value="Register">
+</form>
+{% endblock %}
 
 
 
