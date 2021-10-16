@@ -77,6 +77,16 @@ def user_login():
     return redirect("/users", user_id=user.user_id)
 
 
+@app.route('/logout', methods=['GET'])
+def logout():
+    """User log out"""
+
+    session.clear()
+    flash("You have been logged out")
+    
+    return redirect("/")
+
+
 @app.route("/medications", methods["POST"])
 def submission():
     """User medications"""
@@ -108,6 +118,12 @@ def submission():
 @app.route("/medication_plan", methods=["GET"])
 def user_meds():
 """User medications that they are currently taking"""
+
+    user = session["user_id"]
+
+    all_meds = User_Medications.query.filter_by(user_id=user_id).all()
+
+    #Do I need to create an empty dictionary of the users medications
 
 
 def reminders(user_id)
