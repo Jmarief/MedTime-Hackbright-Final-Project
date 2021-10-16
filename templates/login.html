@@ -1,0 +1,29 @@
+{% extends 'base.html' %}  
+{% block content %} 
+{% if registered != Flase %} 
+    You have successfully registered - Please log in to begin tracking your medications!
+{% endif %}  
+<div class="container">
+  <h1>Login Here</h1>
+  <form action="/login" method="POST">
+
+    <div>
+        <lable>Email:
+            <input type="email" name="email" required>
+        </lable>
+    </div>
+    <div>
+        <lable>Password:
+            <input type="password" name="password" required>
+        </lable>
+    </div>
+    <div>
+        <input type="submit" value="Log In">
+    </div>
+  </form>
+  <span>Not registered?</span>
+  <a href="/registration"> Register </a>
+    </div>
+</div>
+{% endblock %}
+    
