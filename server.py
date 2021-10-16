@@ -1,11 +1,6 @@
 """Server for MedTime app"""
 
-from flask import Flask
-render_template
-redirect
-flash
-session
-request
+from flask import Flask, render_template, redirect, flash, session, request
 from model import db, connect_to_db
 from datetime import datetime 
 from datetime import timedelta
@@ -42,8 +37,8 @@ def registration_form():
     if user is not None:
         flash(f"User {user.fname} {user.lname} has already registered!")
 
-        else:
-            db.session.add(new_user)
+    else:
+        db.session.add(new_user)
 
         db.session.commit()
         flash(f"User {new_user.fname} {new_user.lname} account has been registered!")
@@ -114,20 +109,26 @@ def submission():
     flash("Medication has been added")
     return redirecr("/")
 
-//NEED TO FIX - Complete medication plan
+
 @app.route("/medication_plan", methods=["GET"])
 def user_meds():
-"""User medications that they are currently taking"""
+    """User medications that they are currently taking"""
 
     user = session["user_id"]
 
     all_meds = User_Medications.query.filter_by(user_id=user_id).all()
+    user = User.query.filter_by(user_id=user_id).all()
 
-    #Do I need to create an empty dictionary of the users medications
+    medications_dict = dict()
+
+    for m in all_meds:
+        medications_dict.setdefault(m)
+
+        return render_template("medication_directory.html", user=user, medications=all_meds)
 
 
-def reminders(user_id)
-"""User reminders for taking medications"""
+def reminders(user_id):
+    """User reminders for taking medications"""
 
     current_date = datetime.now()
     med_hour = current_date + timedelta(hours=1)
@@ -136,8 +137,8 @@ def reminders(user_id)
 
     for medications in medication_plan:
         user_medications = Reminders.query.filter_by(medications_id=medications.medications_id).all()
-            if current_date <= reminders.timestamp and reminders.timestamp <= med_hour:
-                message = "REMINDER {first_name": time to take {user_medication_id}."
+        if current_date <= reminders.timestamp and reminders.timestamp <= med_hour:
+                message = "REMINDER {first_name}: time to take {user_medication_id}."
                 flash(message)
                 return message
 

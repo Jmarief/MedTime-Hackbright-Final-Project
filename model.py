@@ -48,8 +48,8 @@ class User_Medications(db.Model):
     dosage = db.Column(db.String(200), nullable=False)
     frequency_per_day = db.Column(db.Integer, nullable=True)
 
-    user = db.relationship('Users' backref='user_medications')
-    medications = db.relationship('Medications' backref='user_medications')
+    user = db.relationship('Users', backref=db.backref('user_medications')
+    #medications = db.relationship('Medications', backref='user_medications')
 
     def __repr__(self):
         return f"<User_Medications user_medication_id={self.user_medication_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day}"
@@ -69,10 +69,10 @@ class Reminders(db.Model):
     intake_alarm = db.Column(db.DateTime)
     refills = db.Column(db.Integer, nullable=True)
 
-    user_medications = db.relationship('User_Medications' backref='reminders')
-    medications = db.relationship('Medications' backref='reminders')
+    user_medications = db.relationship('User_Medications', backref='reminders')
+    medications = db.relationship('Medications', backref='reminders')
 
-     def __repr__(self):
+    def __repr__(self):
         return f"<Reminders reminders_id{self.reminders_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day} scheduled_date={self.scheduled_date} scheduled_time={self.scheduled_time} refills={self.refills}"
 
 
