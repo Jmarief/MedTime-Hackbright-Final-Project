@@ -40,12 +40,12 @@ def registration_form():
     else:
         db.session.add(new_user)
 
-        db.session.commit()
-        flash(f"User {new_user.fname} {new_user.lname} account has been registered!")
+    db.session.commit()
+    flash(f"User {new_user.fname} {new_user.lname} account has been registered!")
 
-        session["new_user_id"] = new_user.user_id
+    session["new_user_id"] = new_user.user_id
 
-        return redirect("/")
+    return redirect("/")
 
 
 @app.route("/login", methods=["POST"])
@@ -138,11 +138,9 @@ def reminders(user_id):
     for medications in medication_plan:
         user_medications = Reminders.query.filter_by(medications_id=medications.medications_id).all()
         if current_date <= reminders.timestamp and reminders.timestamp <= med_hour:
-                message = "REMINDER {first_name}: time to take {user_medication_id}."
+                message = "REMINDER {first_name}: it's time to take {user_medication_id}."
                 flash(message)
                 return message
-
-
 
 
 if __name__ == "__main__":

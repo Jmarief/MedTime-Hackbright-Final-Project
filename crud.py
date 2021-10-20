@@ -4,15 +4,16 @@ from model import db, User, Medications, User_Medications, Reminders, connect_to
 
 """Database Functions"""
 
-def create_user(f_name, l_name, email, phone_number, password):
+def create_user(fname, lname, email, phone_number, password):
     """Create a new user and return user"""
 
-    user = User(f_name=f_name, l_name=l_name, phone_number=phone_number, password=password)
+    user = User(fname=fname, lname=lname, phone_number=phone_number, password=password)
 
     db.session.add(user)
     db.session.commit()
 
     return user
+
 
 def get_user_by_email(email):
     """Find user by email"""
@@ -23,7 +24,6 @@ def login_user(email, password):
     """Return a user by email and password"""
 
     return User.guery.filter(user.email==email, User.password==password).first()
-    
 
 
 def create_medications(instructions, medication_allergies):
@@ -62,3 +62,8 @@ def create_reminders(user_medications_id, medication_id, dosage, scheduled_date,
     
     return reminder                
 
+
+
+if __name__ == '__main__':
+    from server import app
+    connect_to_db(app)

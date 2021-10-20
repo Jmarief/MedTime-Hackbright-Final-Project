@@ -7,38 +7,100 @@
 
 {% block content %}
 
-    <h2>Never forget to take your medications</h2>
+    <h2>Register now and never forget to take your medications!</h2>
 
 <form action="/register" method="POST">
 
     <div class="form-group">
-     <lable for="fname">First name:
+     <lable for="fname">First name:</lable>
          <input class="form-control" type="text" id="fname" name="fname" placeholder="Enter your first name here">
      </lable>
      </div>
      <div class="form-group">
-         <lable for="lname">Last name:
+         <lable for="lname">Last name:</lable>
              <input class="form-control" type="text" id="lname" name="lname" placeholder="Enter your last name here">
          </lable>
      </div>
      <div class="form-group">
-         <lable for="email">Email:
+         <lable for="email">Email:</lable>
              <input class="form-control" type="text" id="email" name="email" placeholder="Enter your email, this will also be your username">
          </lable>
      </div>
      <div class="form-group">
-         <lable for="password">Password:
+         <lable for="password">Password:</lable>
             <input class="form-control" type="text" id="password" name="password" placeholder="Enter a unique password">
          </lable>
      </div>
      <div class="form-group">
-        <lable for="phone_number">Phone Number:
+        <lable for="phone_number">Phone Number:</lable>
            <input class="form-control" type="text" id="phone_number" name="phone_number" placeholder="Enter your phone number">
         </lable>
     </div>
-
-    <input type="Submit" value="Register">
-</form>
+     <div class="form-group">
+         <lable for="user_medications">Enter the name of each medication:</lable>
+         <input class="form-control" type="text" id="user_medications" name="user_medications" placeholder="Enter medication name here">
+    </div>   
+     <div class="form-group">
+        <lable for="dosage">Medication dosage:</lable>
+        <input class="form-control" type="number" id="dosage" name="dosage" placeholder="Enter dosage here">
+    </div>   
+    <div class="form-group">
+        <lable for="frequency_per_day">Check each box of the time of day you take your medication:</lable>
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="00:00:00"> 12:00 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="00:30:00"> 12:30 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="01:00:00"> 01:00 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="01:30:00"> 01:30 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="02:00:00"> 02:00 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="02:30:00"> 02:30 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="03:00:00"> 03:00 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="03:30:00"> 03:30 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="04:00:00"> 04:00 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="04:30:00"> 04:30 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="05:00:00"> 05:00 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="05:30:00"> 05:30 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="06:00:00"> 06:00 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="06:30:00"> 06:30 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="07:00:00"> 07:00 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="07:30:00"> 07:30 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="08:00:00"> 08:00 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="08:30:00"> 08:30 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="09:00:00"> 09:00 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="09:30:00"> 09:30 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="10:00:00"> 10:00 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="10:30:00"> 10:30 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="11:00:00"> 11:00 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="11:30:00"> 11:30 AM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="12:00:00"> 12:00 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="12:30:00"> 12:30 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="01:00:00"> 01:00 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="01:30:00"> 01:30 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="02:00:00"> 02:00 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="02:30:00"> 02:30 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="03:00:00"> 03:00 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="03:30:00"> 03:30 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="04:00:00"> 04:00 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="04:30:00"> 04:30 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="05:00:00"> 05:00 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="05:30:00"> 05:30 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="06:00:00"> 06:00 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="06:30:00"> 06:30 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="07:00:00"> 07:00 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="07:30:00"> 07:30 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="08:00:00"> 08:00 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="08:30:00"> 08:30 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="09:00:00"> 09:00 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="09:30:00"> 09:30 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="10:00:00"> 10:00 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="10:30:00"> 10:30 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="11:00:00"> 11:00 PM
+        <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="11:30:00"> 11:30 PM
+    </lable>
+    </div>   
+    <br>
+    <div class = "register">
+        <button class="sign-up-button" type = "submit">"Press here to complete your registration"</button>
+    </div>
+</form><br>
 {% endblock %}
 
 

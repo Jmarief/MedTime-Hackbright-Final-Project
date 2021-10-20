@@ -12,8 +12,8 @@ class User(db.Model):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    f_name = db.Column(db.String(25))
-    l_name = db.Column(db.String(25), nullable=True)
+    fname = db.Column(db.String(25))
+    lname = db.Column(db.String(25), nullable=True)
     email = db.Column(db.String(100), nullable=False, unique=True)
     phone_number = db.Column(db.String(10), nullable=False, unique=True)
     password = db.Column(db.String(50), nullable=False)
@@ -22,7 +22,7 @@ class User(db.Model):
         return check_password(self.password, input_password)
 
     def __repr__(self):
-        return f"<User user_id={self.user_id} email={self.email}>'"
+        return f"<User user_id={self.user_id} email={self.email}>"
 
 
 class Medications(db.Model):
@@ -35,7 +35,7 @@ class Medications(db.Model):
     medication_allergies = db.Column(db.String(500), nullable=True)
 
     def __repr__(self):
-        return f"<Medications medication_id={self.medication_id} instructions={self.instructions} medication_allergies={self.medication_allergies}"
+        return f"<Medications medication_id={self.medication_id} instructions={self.instructions} medication_allergies={self.medication_allergies}>"
 
 
 class User_Medications(db.Model):
@@ -50,10 +50,10 @@ class User_Medications(db.Model):
     frequency_per_day = db.Column(db.Integer, nullable=True)
 
     user = db.relationship('Users', backref=db.backref('user_medications')
-    #medications = db.relationship('Medications', backref='user_medications')
+    medications = db.relationship('Medications', backref='user_medications')
 
     def __repr__(self):
-        return f"<User_Medications user_medication_id={self.user_medication_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day}"
+        return f"<User_Medications user_medication_id={self.user_medication_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day}>"
 
 
 class Reminders(db.Model):
@@ -74,7 +74,7 @@ class Reminders(db.Model):
     medications = db.relationship('Medications', backref='reminders')
 
     def __repr__(self):
-        return f"<Reminders reminders_id{self.reminders_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day} scheduled_date={self.scheduled_date} scheduled_time={self.scheduled_time} refills={self.refills}"
+        return f"<Reminders reminders_id{self.reminders_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day} scheduled_date={self.scheduled_date} scheduled_time={self.scheduled_time} refills={self.refills}>"
 
 
 """NEED TO DO - Pharmacy Information Table"""
@@ -97,4 +97,3 @@ if __name__ == "__main__":
 
     connect_to_db(app)
     db.create_all()
-

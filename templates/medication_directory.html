@@ -1,7 +1,7 @@
 {% extends 'base.html' %} 
 {% block content %}
 
-<h1>Hello, {{ user.f_name }} !</h1>
+<h1>Hello, {{ user.fname }} !</h1>
 
 <br>
 <div id="medications-html">
@@ -14,5 +14,20 @@
     </i>
     Medication Information:
 </i>
-
+{% for med in meds %} 
+    <br/>
+    <ol> <i class="fa fa-medkit"></i> Medication Name: {{ med.user_medications }} </ol>
+    <ul>
+        <li>How many pills do you take each time you take your medication? {{ med.dosage }}</li>
+    </ul>
 </div>
+{% endfor %} 
+
+<ul>
+    {% for m in meds %} 
+        <li><i calss="fa fa-clock-o"></i> REMINDER medication times for: {{ m.user_medications }} 
+            <ul>
+                {% for time in m.scheduled_time %}</li>
+            </ul>
+        </li>
+{% endblock %}
