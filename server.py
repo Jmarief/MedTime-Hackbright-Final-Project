@@ -14,6 +14,7 @@ def homepage():
 
     return render_template("homepage.html")
 
+
 @app.route("/register")
 def register():
     """Registration form"""
@@ -35,10 +36,11 @@ def registration_form():
     user = User.query.filter_by(fname=fname, lname=lname, email=email, password=password).first()
 
     if user is not None:
-        flash(f"User {user.fname} {user.lname} has already registered!")
+            flash(f"User {user.fname} {user.lname} has already registered!")
+            return redirect("/")
 
     else:
-        db.session.add(new_user)
+            db.session.add(new_user)
 
     db.session.commit()
     flash(f"User {new_user.fname} {new_user.lname} account has been registered!")
@@ -107,7 +109,7 @@ def submission():
         db.session.commit()
     
     flash("Medication has been added")
-    return redirecr("/")
+    return redirect("/")
 
 
 @app.route("/medication_plan", methods=["GET"])
@@ -117,7 +119,8 @@ def user_meds():
     user = session["user_id"]
 
     all_meds = User_Medications.query.filter_by(user_id=user_id).all()
-    user = User.query.filter_by(user_id=user_id).all()
+    user = User.query.filter_by(user_id=user_id).first()
+    med_time = Reminders.query.filter_by(user_id=user_id).all()
 
     medications_dict = dict()
 

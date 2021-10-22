@@ -29,7 +29,7 @@ def login_user(email, password):
 def create_medications(instructions, medication_allergies):
     """create and return medications"""
 
-    medications = Medications(instructions=instructions, medication_allergies)
+    medications = Medications(instructions=instructions, medication_allergies=medication_allergies)
 
     db.session.add(medications)
     db.session.commit()
@@ -53,8 +53,8 @@ def create_reminders(user_medications_id, medication_id, dosage, scheduled_date,
                      intake_alarm, refills):
     """Create and return reminders"""
 
-    reminder = Reminders(user_medications_id=user_medications_id, medication_id=medication_id
-                         dosage=dosage, scheduled_date=scheduled_date, scheduled_time=scheduled_time
+    reminder = Reminders(user_medications_id=user_medications_id, medication_id=medication_id,
+                         dosage=dosage, scheduled_date=scheduled_date, scheduled_time=scheduled_time,
                          intake_alarm=intake_alarm, refills=refills)
 
     db.session.add(reminder)
