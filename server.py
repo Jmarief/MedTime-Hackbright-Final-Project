@@ -12,7 +12,11 @@ import model
 def homepage():
     """Homepage"""
 
-    return render_template("homepage.html")
+    if "current_user" in session:
+        current_user = session["current_user"]
+        return render_template('homepage.html', current_user = "current_user")
+    else:
+       return render_template('homepage.html', current_user = None)
 
 
 @app.route("/register")
@@ -37,7 +41,7 @@ def registration_form():
 
     if user is not None:
             flash(f"User {user.fname} {user.lname} has already registered!")
-            return redirect("/")
+            return redirect("/login")
 
     else:
             db.session.add(new_user)
@@ -47,7 +51,7 @@ def registration_form():
 
     session["new_user_id"] = new_user.user_id
 
-    return redirect("/")
+    return redirect("registration.html")
 
 
 @app.route("/login", methods=["POST"])

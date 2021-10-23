@@ -1,8 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
+<body class='homepage'>
+    <header>
 
-
-
-
+        <div class="container-1">
+            <div class="intro-text">
+                <div class="intro-heading">Welcome to MedTime</div>
+                <div class="intro-lead-in">Track and set reminders for all of your medications</div>
+                <a href="/register" class="page-scroll btn btn-x1" style="margin-top: 1em;"> START NOW</a>"
+        </div>
+        <div class="login-form">
+            <h4><i class="fas fa-pills"></i>MedTime</h4>
+            <form action="/login" method="POST">
+            <div class="email">
+                <input type="email" name="email" placeholder="email" required>
+            </div>
+            <div class="password">
+                <input type="password" name="password" placeholder="password" required>
+            </div>
+            <input type="email" name="email" placeholder="email" required>
+        </div>
+        <div>
+            <input type="submit" value="Log In"> 
+        </div>
+        </form>
+        </div>
+    </header>
+</body>
 
 {% endblock %}
