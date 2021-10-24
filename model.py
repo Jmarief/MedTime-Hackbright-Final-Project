@@ -50,8 +50,8 @@ class User_Medications(db.Model):
     frequency_per_day = db.Column(db.Integer, nullable=True)
 
     user = db.relationship('Users', backref=db.backref('user_medications')
-    medications = db.relationship('Medications', backref='user_medications')
-
+    #medications = db.relationship('Medications', backref='user_medications')
+    
     def __repr__(self):
         return f"<User_Medications user_medication_id={self.user_medication_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day}>"
 
