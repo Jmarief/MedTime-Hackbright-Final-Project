@@ -1,10 +1,11 @@
 """Server for MedTime app"""
 
 from flask import Flask, render_template, redirect, flash, session, request
-from model import db, User, Medications, User_Medications, Reminders
+from model import connect_to_db, db, User, Medications, User_Medications, Reminders
 from datetime import datetime 
 from datetime import timedelta
 
+app = Flask(__name__)
 
 @app.route("/") 
 def homepage():
@@ -86,7 +87,7 @@ def logout():
     return redirect("/")
 
 
-@app.route("/medications", methods["POST"])
+@app.route("/medications", methods=["POST"])
 def submission():
     """User medications"""
 

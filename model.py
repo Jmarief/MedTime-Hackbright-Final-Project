@@ -1,6 +1,6 @@
 """Models for MedTime Tracker and Reminder app"""
 
-from flask_sqlalchemy import SQLAlcemy
+from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from datetime import timedelta
 
@@ -44,19 +44,17 @@ class User_Medications(db.Model):
     __tablename__ = "user_medications"
 
     user_medications_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer, db.Foreignkey('users.user_id'))
-    medication_id = db.Column(db.Integer, db.Foreignkey('medications.medication_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    medication_id = db.Column(db.Integer, db.ForeignKey('medications.medication_id'))
     dosage = db.Column(db.Integer, nullable=False)
     frequency_per_day = db.Column(db.Integer, nullable=True)
 
-    user = db.relationship('Users', backref=db.backref('user_medications'),
-    medications = db.relationship('Medications', backref=db.backref('user_medications')
+    user = db.relationship('Users', backref=db.backref('user_medications'))
+    medications = db.relationship('Medications', backref=db.backref('user_medications'))
     
     def __repr__(self):
-        return f"<User_Medications user_medications_id={self.user_medication_id, dosage={self.dosage, frequency_per_day={self.frequency_per_day}>"
-    
-    #def __repr__(self):
-        #return f"<User_Medications user_medication_id={self.user_medication_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day}>"
+        return f"<User_Medications user_medications_id={self.user_medication_id}, dosage={self.dosage}, frequency_per_day={self.frequency_per_day}>"
+
 
 
 class Reminders(db.Model):
@@ -65,16 +63,16 @@ class Reminders(db.Model):
     __tablename__ = "reminders"
 
     reminders_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_medications_id = db.Column(db.String, db.Foreignkey('user_medications.user_medications_id')
-    medication_id = db.Column(db.Integer, db.Foreignkey('medications.medication_id'))
-    dosage = db.Column(db.String, db.Foreignkey('user_medications.user_medication_id'))
+    user_medications_id = db.Column(db.String, db.ForeignKey('user_medications.user_medications_id'))
+    medication_id = db.Column(db.Integer, db.ForeignKey('medications.medication_id'))
+    dosage = db.Column(db.String, db.ForeignKey('user_medications.user_medication_id'))
     scheduled_date = db.Column(db.DateTime)
-    scheduled_time = db.Column(db.DateTime(timezone=True)
+    scheduled_time = db.Column(db.DateTime(timezone=True))
     intake_alarm = db.Column(db.DateTime)
     refills = db.Column(db.Integer, nullable=True)
 
-    user_medications = db.relationship('User_Medications', backref='reminders'),
-    medications = db.relationship('Medications', backref='reminders'))
+    user_medications = db.relationship('User_Medications', backref='reminders')
+    medications = db.relationship('Medications', backref='reminders')
 
     def __repr__(self):
         return f"<Reminders reminders_id{self.reminders_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day} scheduled_date={self.scheduled_date} scheduled_time={self.scheduled_time} refills={self.refills}>"
@@ -82,21 +80,19 @@ class Reminders(db.Model):
 
 """NEED TO DO - Pharmacy Information Table"""
 
-"""Need to finish this part"""
-def connect_to_db(app)
-    """Connect to the database flask app"""
+def connect_to_db(app):
+    """Connect the database to our Flask app."""
 
-    db.app = flask_app
-    db.init_app(flask_app)
-
-    print("Connected to the db")
-    
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///medtime'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_ECHO'] = True
+    db.app = app
+    db.init_app(app)
 
 if __name__ == "__main__":
-    from server import app
 
-    from flask import flask
-    app = Flask(__name__)
+    from server import app
 
     connect_to_db(app)
     db.create_all()
+    print("Connected to DB.")
