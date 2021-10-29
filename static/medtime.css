@@ -1,7 +1,5 @@
 body {
     background-image: url("/static/pills.jpeg") no-repeat;
     background-size: cover;
-    background-color: whitesmoke;
-    font-family: sans-serif;
     padding-bottom: 50px;
 }

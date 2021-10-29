@@ -1,11 +1,9 @@
 """Server for MedTime app"""
 
 from flask import Flask, render_template, redirect, flash, session, request
-from model import db, connect_to_db
+from model import db, User, Medications, User_Medications, Reminders
 from datetime import datetime 
 from datetime import timedelta
-
-import model
 
 
 @app.route("/") 

@@ -35,7 +35,7 @@ class Medications(db.Model):
     medication_allergies = db.Column(db.String(500), nullable=True)
 
     def __repr__(self):
-        return f"<Medications medication_id={self.medication_id} instructions={self.instructions} medication_allergies={self.medication_allergies}>"
+        return f"<Medications medication_id={self.medication_id}, instructions={self.instructions}, medication_allergies={self.medication_allergies}>"
 
 
 class User_Medications(db.Model):
@@ -46,14 +46,17 @@ class User_Medications(db.Model):
     user_medications_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.Foreignkey('users.user_id'))
     medication_id = db.Column(db.Integer, db.Foreignkey('medications.medication_id'))
-    dosage = db.Column(db.String(200), nullable=False)
+    dosage = db.Column(db.Integer, nullable=False)
     frequency_per_day = db.Column(db.Integer, nullable=True)
 
-    user = db.relationship('Users', backref=db.backref('user_medications')
-    #medications = db.relationship('Medications', backref='user_medications')
+    user = db.relationship('Users', backref=db.backref('user_medications'),
+    medications = db.relationship('Medications', backref=db.backref('user_medications')
     
     def __repr__(self):
-        return f"<User_Medications user_medication_id={self.user_medication_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day}>"
+        return f"<User_Medications user_medications_id={self.user_medication_id, dosage={self.dosage, frequency_per_day={self.frequency_per_day}>"
+    
+    #def __repr__(self):
+        #return f"<User_Medications user_medication_id={self.user_medication_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day}>"
 
 
 class Reminders(db.Model):
@@ -62,16 +65,16 @@ class Reminders(db.Model):
     __tablename__ = "reminders"
 
     reminders_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_medications_id = db.Column(db.String, db.Foreignkey('user_medications.user_medications_id'))
+    user_medications_id = db.Column(db.String, db.Foreignkey('user_medications.user_medications_id')
     medication_id = db.Column(db.Integer, db.Foreignkey('medications.medication_id'))
     dosage = db.Column(db.String, db.Foreignkey('user_medications.user_medication_id'))
     scheduled_date = db.Column(db.DateTime)
-    scheduled_time = db.Column(db.DateTime(timezone=True))
+    scheduled_time = db.Column(db.DateTime(timezone=True)
     intake_alarm = db.Column(db.DateTime)
     refills = db.Column(db.Integer, nullable=True)
 
-    user_medications = db.relationship('User_Medications', backref='reminders')
-    medications = db.relationship('Medications', backref='reminders')
+    user_medications = db.relationship('User_Medications', backref='reminders'),
+    medications = db.relationship('Medications', backref='reminders'))
 
     def __repr__(self):
         return f"<Reminders reminders_id{self.reminders_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day} scheduled_date={self.scheduled_date} scheduled_time={self.scheduled_time} refills={self.refills}>"
