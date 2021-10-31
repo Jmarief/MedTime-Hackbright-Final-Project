@@ -5,7 +5,14 @@ from model import connect_to_db, db, User, Medications, User_Medications, Remind
 from datetime import datetime 
 from datetime import timedelta
 
+import crud
+from jinja2 import StrictUndefined
+
 app = Flask(__name__)
+app.secret_key = "dev"
+app.jinja_env.undefined = StrictUndefined
+
+
 
 @app.route("/") 
 def homepage():
