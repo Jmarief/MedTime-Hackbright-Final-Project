@@ -15,7 +15,7 @@ def homepage():
 
     if "current_user" in session:
         current_user = session["current_user"]
-        return render_mtemplate('homepage.html', current_user = "current_user")
+        return render_template('homepage.html', current_user = "current_user")
     else:
        return render_template('homepage.html', current_user = None, medications=medications)
 
