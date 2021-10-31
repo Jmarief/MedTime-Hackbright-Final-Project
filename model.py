@@ -49,12 +49,11 @@ class User_Medications(db.Model):
     dosage = db.Column(db.Integer, nullable=False)
     frequency_per_day = db.Column(db.Integer, nullable=True)
 
-    user = db.relationship('Users', backref=db.backref('user_medications'))
-    medications = db.relationship('Medications', backref=db.backref('user_medications'))
+    user = db.relationship('User', backref='user_medications')
+    medications = db.relationship('Medications', backref='user_medications')
     
     def __repr__(self):
         return f"<User_Medications user_medications_id={self.user_medication_id}, dosage={self.dosage}, frequency_per_day={self.frequency_per_day}>"
-
 
 
 class Reminders(db.Model):
@@ -63,9 +62,8 @@ class Reminders(db.Model):
     __tablename__ = "reminders"
 
     reminders_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_medications_id = db.Column(db.String, db.ForeignKey('user_medications.user_medications_id'))
+    user_medications_id = db.Column(db.Integer, db.ForeignKey('user_medications.user_medications_id'))
     medication_id = db.Column(db.Integer, db.ForeignKey('medications.medication_id'))
-    dosage = db.Column(db.String, db.ForeignKey('user_medications.user_medication_id'))
     scheduled_date = db.Column(db.DateTime)
     scheduled_time = db.Column(db.DateTime(timezone=True))
     intake_alarm = db.Column(db.DateTime)
@@ -80,19 +78,15 @@ class Reminders(db.Model):
 
 """NEED TO DO - Pharmacy Information Table"""
 
-def connect_to_db(app):
-    """Connect the database to our Flask app."""
+def connect_to_db(flask_app, db_uri='postgresql:///medtime', echo=False):
+    flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
+    flask_app.config['SQLALCHEMY_ECHO'] = echo
+    flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.app = flask_app
+    db.init_app(flask_app)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///medtime'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SQLALCHEMY_ECHO'] = True
-    db.app = app
-    db.init_app(app)
+    print('Connected to the db!')
 
-if __name__ == "__main__":
-
+if __name__ == '__main__':
     from server import app
-
     connect_to_db(app)
-    db.create_all()
-    print("Connected to DB.")

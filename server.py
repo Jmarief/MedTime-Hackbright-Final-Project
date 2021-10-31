@@ -11,11 +11,13 @@ app = Flask(__name__)
 def homepage():
     """Homepage"""
 
+    medications = User_Medications.query.filter_by(user_id=1).all()
+
     if "current_user" in session:
         current_user = session["current_user"]
-        return render_template('homepage.html', current_user = "current_user")
+        return render_mtemplate('homepage.html', current_user = "current_user")
     else:
-       return render_template('homepage.html', current_user = None)
+       return render_template('homepage.html', current_user = None, medications=medications)
 
 
 @app.route("/register")
@@ -149,7 +151,6 @@ def reminders(user_id):
                 return message
 
 
-if __name__ == "__main__":
-    app.debug = True
-
+if __name__ == '__main__':
     connect_to_db(app)
+    app.run(host='0.0.0.0', debug=True)

@@ -10,8 +10,5 @@ INSTRUCTIONS
 2. Create Database
     - createdb medtime
 
-3. Create Python-based ORM
-    - python3 model.py
-
-4. Run the app from the command line
+3. Run the app from the command line
     - python3 server.py 
