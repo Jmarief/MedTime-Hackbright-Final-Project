@@ -2,7 +2,7 @@
 
 from flask import Flask, render_template, redirect, flash, session, request
 from model import connect_to_db, db, User, Medications, User_Medications, Reminders
-from datetime import datetime 
+from datetime import datetime
 from datetime import timedelta
 
 import crud
@@ -13,8 +13,7 @@ app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
 
-
-@app.route("/") 
+@app.route("/")
 def homepage():
     """Homepage"""
 
@@ -22,9 +21,9 @@ def homepage():
 
     if "current_user" in session:
         current_user = session["current_user"]
-        return render_template('homepage.html', current_user = "current_user")
+        return render_template('homepage.html', current_user="current_user")
     else:
-       return render_template('homepage.html', current_user = None, medications=medications)
+        return render_template('homepage.html', current_user=None, medications=medications)
 
 
 @app.route("/register")
@@ -44,15 +43,17 @@ def registration_form():
     password = request.form.get("password")
     phone_number = request.form.get("phone_number")
 
-    new_user = User(fname=fname, lname=lname, email=email, password=password, phone_number=phone_number)
-    user = User.query.filter_by(fname=fname, lname=lname, email=email, password=password).first()
+    new_user = User(fname=fname, lname=lname, email=email,
+                    password=password, phone_number=phone_number)
+    user = User.query.filter_by(
+        fname=fname, lname=lname, email=email, password=password).first()
 
     if user is not None:
-            flash(f"User {user.fname} {user.lname} has already registered!")
-            return redirect("/login")
+        flash(f"User {user.fname} {user.lname} has already registered!")
+        return redirect("/")
 
     else:
-            db.session.add(new_user)
+        db.session.add(new_user)
 
     db.session.commit()
     flash(f"User {new_user.fname} {new_user.lname} account has been registered!")
@@ -62,13 +63,27 @@ def registration_form():
     return redirect("registration.html")
 
 
+@app.route("/login")
+def login():
+
+    if "new_user_id" in session:
+        user_is = session["new_user_is"]
+        user_name = User.query.filter_by(user_id=user_id).first().fname
+        del session["new_user_id"]
+
+    else:
+        user_name = "User"
+    
+    return render_template("login.html", user=user_name)
+
+
 @app.route("/login", methods=["POST"])
 def user_login():
     """User login"""
 
     email = request.form.get("email")
     password = request.form.get("password")
-    
+
     user = User.query.filter_by(email=email).first()
 
     if not user:
@@ -79,11 +94,11 @@ def user_login():
     elif user.password != password:
         flash("Incorrect password, please try again")
 
-        return redirect("/login")
+        return redirect("/")
 
     session["user_id"] = user.user_id
     flash("Welcome, you have logged in successfully")
-    return redirect("/users", user_id=user.user_id)
+    return redirect("medication_directory.html")
 
 
 @app.route('/logout', methods=['GET'])
@@ -92,7 +107,7 @@ def logout():
 
     session.clear()
     flash("You have been logged out")
-    
+
     return redirect("/")
 
 
@@ -107,19 +122,20 @@ def submission():
     dosage = request.form.get("dosage")
     frequency_per_day = request.form.get("frequency_per_day")
 
-    new_medication = Medications(user_id=user, medications_id=medications_id, 
-                                user_medications_id=user_medications_id, dosage=dosage, frequency_per_day=frequency_per_day )
+    new_medication = Medications(user_id=user, medications_id=medications_id,
+                                 user_medications_id=user_medications_id, dosage=dosage, frequency_per_day=frequency_per_day)
 
     db.session.add(new_medication)
-    db.session.commit() 
+    db.session.commit()
 
     for new_time in frequency_per_day:
         scheduled_time = datetime.strptime(new_time, "%H:%M:%S")
-        new_frequency = Reminders(user=user_id, scheduled_time=scheduled_time, new_medications=new_medication.medications.id)
-
+        new_frequency = Reminders(
+            user=user_id, scheduled_time=scheduled_time, new_medications=new_medication.medications.id
+        )
         db.session.add(new_frequency)
         db.session.commit()
-    
+
     flash("Medication has been added")
     return redirect("/")
 
@@ -151,11 +167,12 @@ def reminders(user_id):
     current_date = current_date.time()
 
     for medications in medication_plan:
-        user_medications = Reminders.query.filter_by(medications_id=medications.medications_id).all()
+        user_medications = Reminders.query.filter_by(
+            medications_id=medications.medications_id).all()
         if current_date <= reminders.timestamp and reminders.timestamp <= med_hour:
-                message = "REMINDER {first_name}: it's time to take {user_medication_id}."
-                flash(message)
-                return message
+            message = "REMINDER {first_name}: it's time to take {user_medication_id}."
+            flash(message)
+            return message
 
 
 if __name__ == '__main__':

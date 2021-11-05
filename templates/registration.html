@@ -5,47 +5,46 @@
     <h1>{% block title %}Registration{% endblock %}</h1>
 {% endblock %}
 
-{% block content %}
-
+{% block body %}
     <h2>Register now and never forget to take your medications!</h2>
 
-<form action="/register" method="POST">
+<form action="/register" method="post">
 
     <div class="form-group">
-     <lable for="fname">First name:</lable>
-         <input class="form-control" type="text" id="fname" name="fname" placeholder="Enter your first name here">
-     </lable>
+     <label for="fname">First name:</label>
+         <input class="form-control" type="text" id="fname" name="fname" placeholder="Enter your first name">
+     </label>
      </div>
      <div class="form-group">
-         <lable for="lname">Last name:</lable>
+         <label for="lname">Last name:</label>
              <input class="form-control" type="text" id="lname" name="lname" placeholder="Enter your last name here">
-         </lable>
+         </label>
      </div>
      <div class="form-group">
-         <lable for="email">Email:</lable>
+         <label for="email">Email:</label>
              <input class="form-control" type="text" id="email" name="email" placeholder="Enter your email, this will also be your username">
-         </lable>
+         </label>
      </div>
      <div class="form-group">
-         <lable for="password">Password:</lable>
+         <label for="password">Password:</label>
             <input class="form-control" type="text" id="password" name="password" placeholder="Enter a unique password">
-         </lable>
+         </label>
      </div>
      <div class="form-group">
-        <lable for="phone_number">Phone Number:</lable>
+        <label for="phone_number">Phone Number:</label>
            <input class="form-control" type="text" id="phone_number" name="phone_number" placeholder="Enter your phone number">
-        </lable>
+        </label>
     </div>
      <div class="form-group">
-         <lable for="user_medications">Enter the name of each medication:</lable>
+         <label for="user_medications">Name of medication:</label>
          <input class="form-control" type="text" id="user_medications" name="user_medications" placeholder="Enter medication name here">
     </div>   
      <div class="form-group">
-        <lable for="dosage">Medication dosage:</lable>
+        <label for="dosage">Medication dosage:</label>
         <input class="form-control" type="number" id="dosage" name="dosage" placeholder="Enter dosage here">
     </div>   
     <div class="form-group">
-        <lable for="frequency_per_day">Check each box of the time of day you take your medication:</lable>
+        <label for="frequency_per_day">Check each box of the time of day you take your medication:</label>
         <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="00:00:00"> 12:00 AM
         <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="00:30:00"> 12:30 AM
         <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="01:00:00"> 01:00 AM
@@ -94,11 +93,11 @@
         <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="10:30:00"> 10:30 PM
         <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="11:00:00"> 11:00 PM
         <input type="checkbox" id="frequency_per_day" name="frequency_per_day" value="11:30:00"> 11:30 PM
-    </lable>
+    </label>
     </div>   
     <br>
     <div class = "register">
-        <button class="sign-up-button" type = "submit">"Press here to complete your registration"</button>
+        <button class="sign-up-button" type = "submit">Submit Medication Registration</button>
     </div>
 </form><br>
 {% endblock %}

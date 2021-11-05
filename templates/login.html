@@ -8,14 +8,14 @@
   <form action="/login" method="POST">
 
     <div>
-        <lable>Email:
+        <label>Email:
             <input type="email" name="email" required>
-        </lable>
+        </label>
     </div>
     <div>
-        <lable>Password:
+        <label>Password:
             <input type="password" name="password" required>
-        </lable>
+        </label>
     </div>
     <div>
         <input type="submit" value="Log In">
@@ -26,4 +26,46 @@
     </div>
 </div>
 {% endblock %}
-    
+
+<!-- {% extends 'base.html' %}
+
+{% block title %}Log In Form{% endblock %}
+
+{% block content %}
+
+<div class="ui fluid container">
+    <div class="ui grid">
+        <div class="six wide column"></div>
+        <div class="four wide centered column">
+
+        {% if just_registered %}
+        <div class="ui success message">
+            <i class="close icon"></i>
+            <div class="header">
+                Your registration was successful!
+            </div>
+            <p>You may now log in.</p>
+        </div>
+        {% endif %}
+
+        <div id="header"><h2 class="top-header">Log In Here</h2></div>
+        <br>
+        <br>
+        <form class="ui form" action="/login" method="POST">
+                <div class="field">
+                    <label>Username</label>
+                    <input type="text" name="username" placeholder="Username" required>
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <button class="ui blue button" type="submit">Log In</button>  <a href="/" class="ui button right floated">Not registered yet?</a>
+            </form>
+        </div>
+        <div class="six wide column"></div>
+    </div>
+</div>
+
+{% endblock %}
+     -->
