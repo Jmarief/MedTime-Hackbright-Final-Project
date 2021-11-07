@@ -30,6 +30,7 @@ class Medications(db.Model):
 
     __tablename__ = "medications"
 
+    medication_name = db.Column(db.String)
     medication_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     instructions = db.Column(db.String(200), nullable=True)
     medication_allergies = db.Column(db.String(500), nullable=True)
@@ -50,7 +51,7 @@ class User_Medications(db.Model):
     frequency_per_day = db.Column(db.Integer, nullable=True)
 
     user = db.relationship('User', backref='user_medications')
-    medications = db.relationship('Medications', backref='user_medications')
+    medication = db.relationship('Medications', backref='user_medications')
     
     def __repr__(self):
         return f"<User_Medications user_medications_id={self.user_medication_id}, dosage={self.dosage}, frequency_per_day={self.frequency_per_day}>"
@@ -70,7 +71,7 @@ class Reminders(db.Model):
     refills = db.Column(db.Integer, nullable=True)
 
     user_medications = db.relationship('User_Medications', backref='reminders')
-    medications = db.relationship('Medications', backref='reminders')
+    medication = db.relationship('Medications', backref='reminders')
 
     def __repr__(self):
         return f"<Reminders reminders_id{self.reminders_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day} scheduled_date={self.scheduled_date} scheduled_time={self.scheduled_time} refills={self.refills}>"

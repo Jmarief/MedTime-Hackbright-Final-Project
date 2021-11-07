@@ -21,6 +21,6 @@ model.dp.create_all()
     #f_name = 'test'
     #l_name = 'testzzz'
 
-crud.create_user('test@test.com', 'testpassword', 'Testa', 'Testalina', '1234678910')
-crud.create_user_medications('customer1', 'rx1', '2', '2x')
+crud.create_user('Testfname', 'Testlname', 'test@test.com', 'testpassword', '1234678910')
+crud.create_user_medications('user1', 'rx1', '2', '2x')
 crud.create_reminders('medication3', 'rx1', '2', scheduled_date.strptime(10-30-2021, "%-m-%-d-%-y"), scheduled_time.strptime(9-00-AM, 6-00-PM) )

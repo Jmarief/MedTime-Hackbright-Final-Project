@@ -1,7 +1,7 @@
 {% extends 'base.html' %} 
-{% block content %}
+{% block body %}
 
-<h1>Hello, {{ user.fname }} !</h1>
+<h1>Hello, {{ user.fname }}!</h1>
 
 <br>
 <div id="medications-html">
@@ -12,7 +12,17 @@
     </i>
     Medication Information:
 </i>
-{% for med in meds %} 
+{% for medication_id, reminders in medications.items() %}
+      <h1>medication_id: {{medication_id}}</h1>
+      <h2>reminders: {{reminders}}</h2>
+      {% for reminder in reminders %}
+      <h3>{{reminder}}</h3>
+      <h4>{{reminder.scheduled_date}}</h4>
+      <h5>{{reminder.scheduled_time}}</h5>
+      <h6>{{reminder.intake_alarm}}</h6>
+      <h7>{{reminder.refills}}</h7>
+        {% endfor %}
+
     <br/>
     <ol> <i class="fa fa-capsules"></i> Medication Name: {{ med.user_medications }} </ol>
     <ul>
@@ -21,12 +31,4 @@
 </div>
 {% endfor %} 
 
-
-<ul>
-    {% for m in meds %} 
-        <li><i calss="fa fa-clock-o"></i> REMINDER medication times for: {{ m.user_medications }} 
-            <ul>
-                {% for time in m.scheduled_time %}</li>
-            </ul>
-        </li>
 {% endblock %}

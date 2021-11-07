@@ -95,10 +95,10 @@ def user_login():
         flash("Incorrect password, please try again")
 
         return redirect("/")
-
+    print(user.user_id)
     session["user_id"] = user.user_id
     flash("Welcome, you have logged in successfully")
-    return redirect("medication_directory.html")
+    return redirect("/medication_directory")
 
 
 @app.route('/logout', methods=['GET'])
@@ -115,14 +115,14 @@ def logout():
 def submission():
     """User medications"""
 
-    user = session["user_id"]
+    user_id = session["user_id"]
 
     medications_id = request.form.get("medications_id")
     user_medications_id = request.form.get("user_medications_id")
     dosage = request.form.get("dosage")
     frequency_per_day = request.form.get("frequency_per_day")
 
-    new_medication = Medications(user_id=user, medications_id=medications_id,
+    new_medication = Medications(user_id=user_id, medications_id=medications_id,
                                  user_medications_id=user_medications_id, dosage=dosage, frequency_per_day=frequency_per_day)
 
     db.session.add(new_medication)
@@ -137,25 +137,25 @@ def submission():
         db.session.commit()
 
     flash("Medication has been added")
-    return redirect("/")
+    return redirect("medication_directory.html")
 
 
-@app.route("/medication_plan", methods=["GET"])
+@app.route("/medication_directory", methods=["GET"])
 def user_meds():
     """User medications that they are currently taking"""
 
-    user = session["user_id"]
+    user_id = session["user_id"]
 
     all_meds = User_Medications.query.filter_by(user_id=user_id).all()
     user = User.query.filter_by(user_id=user_id).first()
-    med_time = Reminders.query.filter_by(user_id=user_id).all()
 
     medications_dict = dict()
 
-    for m in all_meds:
-        medications_dict.setdefault(m)
+    for medication in user.user_medications:
+        medications_dict[medication.medication.medication_id] = medication.reminders
 
-        return render_template("medication_directory.html", user=user, medications=all_meds)
+    return render_template("medication_directory.html", user=user, medications=medications_dict)
+
 
 
 def reminders(user_id):
