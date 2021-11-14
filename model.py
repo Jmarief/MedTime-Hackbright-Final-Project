@@ -30,7 +30,7 @@ class Medications(db.Model):
 
     __tablename__ = "medications"
 
-    medication_name = db.Column(db.String)
+    medication_name = db.Column(db.String(200), nullable=False)
     medication_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     instructions = db.Column(db.String(200), nullable=True)
     medication_allergies = db.Column(db.String(500), nullable=True)
@@ -76,8 +76,6 @@ class Reminders(db.Model):
     def __repr__(self):
         return f"<Reminders reminders_id{self.reminders_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day} scheduled_date={self.scheduled_date} scheduled_time={self.scheduled_time} refills={self.refills}>"
 
-
-"""NEED TO DO - Pharmacy Information Table"""
 
 def connect_to_db(flask_app, db_uri='postgresql:///medtime', echo=False):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
