@@ -25,17 +25,15 @@ def homepage():
     else:
         return render_template('homepage.html', current_user=None, medications=medications)
 
+@app.route("/signup", methods=["GET"])
+def signup_form():
+    """User sign up form"""
 
-@app.route("/register")
-def register():
-    """Registration form"""
+    return render_template("signup.html")
 
-    return render_template("registration.html")
-
-
-@app.route("/register", methods=["POST"])
-def registration_form():
-    """New user registration"""
+@app.route("/signup", methods=["POST"])
+def signup_request():
+    """New user signup"""
 
     fname = request.form.get("fname")
     lname = request.form.get("lname")
@@ -45,8 +43,7 @@ def registration_form():
 
     new_user = User(fname=fname, lname=lname, email=email,
                     password=password, phone_number=phone_number)
-    user = User.query.filter_by(
-        fname=fname, lname=lname, email=email, password=password).first()
+    user = User.query.filter_by(fname=fname, lname=lname, email=email, password=password).first()
 
     if user is not None:
         flash(f"User {user.fname} {user.lname} has already registered!")
@@ -60,7 +57,27 @@ def registration_form():
 
     session["new_user_id"] = new_user.user_id
 
-    return redirect("registration.html")
+    return redirect("/")
+
+@app.route("/register", methods=["GET"])
+def register():
+    """User sign up form"""
+
+    return render_template("registration.html")
+
+@app.route("/register", methods=["POST"])
+def registration_form():
+    """User registration for medications"""
+
+    loggedin_user_id = session.get("user_id")
+    loggedin_user_email = session.get("email")
+
+    if loggedin_user_id:
+        flash("Welcome {user.fname} you are logged in")
+    else:
+        flash("You are currently not logged in")
+    
+    return render_template("signup.html")
 
 
 @app.route("/login")
