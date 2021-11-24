@@ -25,6 +25,7 @@ def homepage():
     else:
         return render_template('homepage.html', current_user=None, medications=medications)
 
+
 @app.route("/signup", methods=["GET"])
 def signup_form():
     """User sign up form"""
@@ -58,6 +59,7 @@ def signup_request():
     session["new_user_id"] = new_user.user_id
 
     return redirect("/")
+
 
 @app.route("/register", methods=["GET"])
 def register():
@@ -93,7 +95,6 @@ def login():
     
     return render_template("login.html", user=user_name)
 
-
 @app.route("/login", methods=["POST"])
 def user_login():
     """User login"""
@@ -116,7 +117,6 @@ def user_login():
     session["user_id"] = user.user_id
     flash("Welcome, you have logged in successfully")
     return redirect("/medication_directory")
-
 
 @app.route('/logout', methods=['GET'])
 def logout():
@@ -172,7 +172,6 @@ def user_meds():
         medications_dict[medication.medication.medication_id] = medication.reminders
 
     return render_template("medication_directory.html", user=user, medications=medications_dict)
-
 
 
 def reminders(user_id):
