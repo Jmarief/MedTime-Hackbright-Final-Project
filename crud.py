@@ -62,7 +62,6 @@ def create_reminders(user_medications_id, medication_id, dosage, scheduled_date,
     
     return reminder                
 
-
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)
