@@ -1,7 +1,60 @@
 /* Sitewide */
 
 body {
-    background-image: url("/static//pills.jpeg") no-repeat center center fixed;
+    background-image: url("/static/pills.jpeg") center center fixed;
     background-size: cover;
     padding-bottom: 50px;
+}
+.nav-link {
+    color: rgb(133, 14, 14);
+    margin-bottom: 0;
+}
+
+.brand {
+	font-size: 24px;
+}
+
+#navbar {
+    background-color: rgba(25,34,49,.6);
+    align-items: center;
+}
+
+.fade-in-color:hover {
+	color: rgb(205,83,96);
+}
+
+.nav-item {
+	display: inline;
+	color: rgb(173, 27, 27);
+}
+
+.form_entry {
+	border-style: solid;
+	border-width: 2px;
+	background-color: rgba(255,255,255,.2);
+	border-color: rgba(255,255,255,.6);
+	border-radius: 10px;
+	padding: 15px;
+	width: 500px;
+	color: rgb(160, 8, 8);
+
+}
+
+.form_entry input {
+	width: 100%;
+	clear: both;
+}
+
+h1, h2 {
+	margin-top: 30px;
+}
+h1, h2, h3, h4, a {
+	font-family: 'Montserrat', sans-serif;
+	color: rgb(119, 9, 9);
+	margin-bottom: 20px;
+
+}
+
+input {
+	margin-bottom: 15px;
 }

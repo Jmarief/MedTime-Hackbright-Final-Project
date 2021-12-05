@@ -25,7 +25,6 @@ def homepage():
     else:
         return render_template('homepage.html', current_user=None, medications=medications)
 
-
 @app.route("/signup", methods=["GET"])
 def signup_form():
     """User sign up form"""
@@ -72,21 +71,23 @@ def registration_form():
     """User registration for medications"""
 
     loggedin_user_id = session.get("user_id")
-    loggedin_user_email = session.get("email")
-
+ 
     if loggedin_user_id:
-        flash("Welcome {user.fname} you are logged in")
-    else:
-        flash("You are currently not logged in")
+        user = User.query.filter_by(user_id=loggedin_user_id).first()
+
+        if user:
+            flash(f"Welcome {user.fname} you are logged in")
+        else:
+            flash("You are currently not logged in")
     
-    return render_template("signup.html")
+    return redirect("medication_directory")
 
 
 @app.route("/login")
 def login():
 
     if "new_user_id" in session:
-        user_is = session["new_user_is"]
+        user_id = session["new_user_id"]
         user_name = User.query.filter_by(user_id=user_id).first().fname
         del session["new_user_id"]
 
@@ -107,7 +108,7 @@ def user_login():
     if not user:
         flash("User email address is not registered")
 
-        return redirect("/register")
+        return redirect("/")
 
     elif user.password != password:
         flash("Incorrect password, please try again")
@@ -154,7 +155,7 @@ def submission():
         db.session.commit()
 
     flash("Medication has been added")
-    return redirect("medication_directory.html")
+    return redirect("medication_directory")
 
 
 @app.route("/medication_directory", methods=["GET"])
