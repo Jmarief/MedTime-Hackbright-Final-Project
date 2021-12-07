@@ -1,4 +1,4 @@
-# MedTime-Hackbright-Final-Project
+# MedTime-Medication_Tracker
 MedTime is a medication tracker and reminder web application
 
 INSTRUCTIONS
