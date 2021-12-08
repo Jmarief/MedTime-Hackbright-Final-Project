@@ -1,4 +1,4 @@
-# MedTime-Medication_Tracker
+# MedTime Medication Tracker
 MedTime is a medication tracker and reminder web application
 
 INSTRUCTIONS
