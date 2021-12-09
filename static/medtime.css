@@ -1,12 +1,46 @@
 /* Sitewide */
+/* Ubermelon Shopping Cart Homepage */
+
+/* The body has an iamge that spans the entire size of the page.
+   Everything is centered and in white. */
+
+   body {
+    background: #333 url("/static/meds.jpg") no-repeat center center fixed;
+    background-size: cover;
+
+    color: rgb(14, 1, 1);
+    text-align: center;
+}
+
+/* site-wrapper and site-wrapper-inner are to vertically center content using
+   table/table-cell vertical centering. */
+
+.site-wrapper {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.site-wrapper-inner {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/* The footer always appears at the bottom of the browser window. */
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;  /* required because fixed position */
+}
 
 body {
-    background-image: url("/static/pills.jpeg") center center fixed;
+    background-image: url("/static/meds.jpeg");
     background-size: cover;
-    padding-bottom: 50px;
+
 }
 .nav-link {
-    color: rgb(133, 14, 14);
+    color: rgb(8, 0, 0);
     margin-bottom: 0;
 }
 
@@ -15,17 +49,17 @@ body {
 }
 
 #navbar {
-    background-color: rgba(25,34,49,.6);
+    background-color: rgb(0, 1, 2, 0.6);
     align-items: center;
 }
 
 .fade-in-color:hover {
-	color: rgb(205,83,96);
+	color: rgb(8, 0, 1);
 }
 
 .nav-item {
 	display: inline;
-	color: rgb(173, 27, 27);
+	color: rgb(3, 0, 0);
 }
 
 .form_entry {
@@ -36,7 +70,7 @@ body {
 	border-radius: 10px;
 	padding: 15px;
 	width: 500px;
-	color: rgb(160, 8, 8);
+	color: rgb(7, 0, 0);
 
 }
 
@@ -49,8 +83,8 @@ h1, h2 {
 	margin-top: 30px;
 }
 h1, h2, h3, h4, a {
-	font-family: 'Montserrat', sans-serif;
-	color: rgb(119, 9, 9);
+	font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: rgb(8, 0, 0);
 	margin-bottom: 20px;
 
 }
@@ -58,3 +92,56 @@ h1, h2, h3, h4, a {
 input {
 	margin-bottom: 15px;
 }
+/* Started drop down*/ 
+.dropdown-check-list {
+	display: inline-block;
+	}
+  
+  .dropdown-check-list .anchor {
+	position: relative;
+	cursor: pointer;
+	display: inline-block;
+	padding: 5px 50px 5px 10px;
+	border: 1px solid #ccc;
+  }
+  
+  .dropdown-check-list .anchor:after {
+	position: absolute;
+	content: "";
+	border-left: 2px solid black;
+	border-top: 2px solid black;
+	padding: 5px;
+	right: 10px;
+	top: 20%;
+	-moz-transform: rotate(-135deg);
+	-ms-transform: rotate(-135deg);
+	-o-transform: rotate(-135deg);
+	-webkit-transform: rotate(-135deg);
+	transform: rotate(-135deg);
+  }
+  
+  .dropdown-check-list .anchor:active:after {
+	right: 8px;
+	top: 21%;
+  }
+  
+  .dropdown-check-list ul.items {
+	padding: 2px;
+	display: none;
+	margin: 0;
+	border: 1px solid #ccc;
+	border-top: none;
+  }
+  
+  .dropdown-check-list ul.items li {
+	list-style: none;
+  }
+  
+  .dropdown-check-list.visible .anchor {
+	color: #0094ff;
+  }
+  
+  .dropdown-check-list.visible .items {
+	display: block;
+  }
+  
