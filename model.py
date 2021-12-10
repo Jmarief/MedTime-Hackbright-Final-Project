@@ -1,8 +1,6 @@
 """Models for MedTime Tracker and Reminder app"""
 
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
-from datetime import timedelta
 
 db = SQLAlchemy()
 
@@ -77,7 +75,7 @@ class Reminders(db.Model):
         return f"<Reminders reminders_id{self.reminders_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day} scheduled_date={self.scheduled_date} scheduled_time={self.scheduled_time} refills={self.refills}>"
 
 
-def connect_to_db(flask_app, db_uri='postgresql:///medtime', echo=False):
+def connect_to_db(flask_app, db_uri='postgresql://postgres:Q1w2e3r4t5y6!@localhost:5432/medtime', echo=False):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     flask_app.config['SQLALCHEMY_ECHO'] = echo
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

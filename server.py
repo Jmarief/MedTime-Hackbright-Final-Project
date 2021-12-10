@@ -1,12 +1,12 @@
 """Server for MedTime app"""
 
-from flask import Flask, render_template, redirect, flash, session, request
-from model import connect_to_db, db, User, Medications, User_Medications, Reminders
 from datetime import datetime
 from datetime import timedelta
 
-import crud
+from flask import Flask, render_template, redirect, flash, session, request
 from jinja2 import StrictUndefined
+
+from model import connect_to_db, db, User, Medications, User_Medications, Reminders
 
 app = Flask(__name__)
 app.secret_key = "dev"
@@ -25,11 +25,13 @@ def homepage():
     else:
         return render_template('homepage.html', current_user=None, medications=medications)
 
+
 @app.route("/signup", methods=["GET"])
 def signup_form():
     """User sign up form"""
 
     return render_template("signup.html")
+
 
 @app.route("/signup", methods=["POST"])
 def signup_request():
@@ -66,12 +68,13 @@ def register():
 
     return render_template("registration.html")
 
+
 @app.route("/register", methods=["POST"])
 def registration_form():
     """User registration for medications"""
 
     loggedin_user_id = session.get("user_id")
- 
+
     if loggedin_user_id:
         user = User.query.filter_by(user_id=loggedin_user_id).first()
 
@@ -79,13 +82,12 @@ def registration_form():
             flash(f"Welcome {user.fname} you are logged in")
         else:
             flash("You are currently not logged in")
-    
+
     return redirect("medication_directory")
 
 
 @app.route("/login")
 def login():
-
     if "new_user_id" in session:
         user_id = session["new_user_id"]
         user_name = User.query.filter_by(user_id=user_id).first().fname
@@ -93,8 +95,9 @@ def login():
 
     else:
         user_name = "User"
-    
+
     return render_template("login.html", user=user_name)
+
 
 @app.route("/login", methods=["POST"])
 def user_login():
@@ -119,6 +122,7 @@ def user_login():
     flash("Welcome, you have logged in successfully")
     return redirect("/medication_directory")
 
+
 @app.route('/logout', methods=['GET'])
 def logout():
     """User log out"""
@@ -141,7 +145,8 @@ def submission():
     frequency_per_day = request.form.get("frequency_per_day")
 
     new_medication = Medications(user_id=user_id, medications_id=medications_id,
-                                 user_medications_id=user_medications_id, dosage=dosage, frequency_per_day=frequency_per_day)
+                                 user_medications_id=user_medications_id, dosage=dosage,
+                                 frequency_per_day=frequency_per_day)
 
     db.session.add(new_medication)
     db.session.commit()
@@ -191,6 +196,8 @@ def reminders(user_id):
             flash(message)
             return message
 
+
 if __name__ == '__main__':
     connect_to_db(app)
+
     app.run(host='0.0.0.0', debug=True)
