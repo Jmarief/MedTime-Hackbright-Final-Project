@@ -4,7 +4,7 @@
 /* The body has an iamge that spans the entire size of the page.
    Everything is centered and in white. */
 
-  body {
+   body {
     background: #333 url("/static/meds.jpg") no-repeat center center fixed;
     background-size: cover;
 
@@ -95,7 +95,7 @@ input {
 /* Started drop down*/ 
 .dropdown-check-list {
 	display: inline-block;
-	}
+  }
   
   .dropdown-check-list .anchor {
 	position: relative;

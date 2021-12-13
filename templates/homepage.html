@@ -1,85 +1,62 @@
-{% extends 'base.html' %}
-{% block title %}MedTime{% endblock %}
+{% extends '_layout-FullBackground.html' %}
+{% block title %}MedTime - Home{% endblock %}
 
 {% block body %}
-<!-- <body>
-    <div class="container-1">
-        <div class="intro-text">
-            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                <div class="card-body">
-            <div class="intro-heading">Welcome to MedTime</div>
-            <div class="intro-lead-in">Track and set reminders for all of your medications.</div>
-            <a href="/signup" class="page-scroll btn btn-x1" style="margin-top: 1em;"> START NOW</a>
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center">Medication - Timing is Everything!</h1>
         </div>
-        <div class="login-form">
-            <h4><MedTime</h4>
-            <form action="/login" method="POST">
-                <div class="email">
-                    <input type="email" name="email" placeholder="email" required>
+
+        {% if (session.__contains__('user_id') == false) %}
+            <div class="auth d-flex justify-content-center h-100">
+                <div class="login card">
+                    <div class="card-header">
+                        <h3>Sign In</h3>
+                        <div class="card-body">
+                            <form action="/login" method="post">
+                                <input type="hidden" asp-for="ReturnUrl"/>
+                                <div class="row">
+                                    <div class="col input-group p-1">
+                                        <span class="input-group-text"><i class="fad fa-user-alien"></i></span>
+                                        <input type="email" name="email" class="form-control" placeholder="Email"
+                                               title="Email"
+                                               autofocus>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col input-group p-1">
+                                        <span class="input-group-text"><i class="fad fa-key-skeleton"></i></span>
+                                        <input type="password" name="password"
+                                               class="form-control" placeholder="Password" autocomplete="off"
+                                               title="Password">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col remember text-end p-1">
+                                        <label for="rememberLogin">Remember Me?</label>
+                                        <input id="rememberLogin" name="rememberLogin" type="checkbox" class="ms-0"
+                                               title="Remember my login.">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="text-center">
+                                        <button class="btn login_btn" name="button" value="login"
+                                                title="Login to MedTime.">Login
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-center links">
+                                Don't have an account?<a href="/register" title="Register for an account.">Register</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="password">
-                    <input type="password" name="password" placeholder="password" required>
-                </div>
-                <div>
-                    <input type="submit" value="Log In"> 
-                </div>
-            </form>
-        </div>
+            </div>
+        {% endif %}
     </div>
-</body>
-</html> --> 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">MedTime</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-<div class="container">
-	<div class="row justify-content-center">
-			<h1>Start taking control of your medications!</h1>
-	</div>
-	<div class="row justify-content-center">
-			<h2>Log in or register to get started</h2>
-	</div>
-	<div class="row justify-content-center">
-		<form action="/login" class="form_entry">
-			Email: <input type="text" name="email"><br>
-			Password: <input type="password" name="password"><br>
-			<input type="submit" href="/medication_directory.html">
-		</form>
-	</div><br><br>
-	<div class="row justify-content-center">
-		<p>Not yet a user? Click <a class="fade-in-color" href="/signup.html">here</a> to register.</p>
-	</div>
-</div>
+
 {% endblock %}

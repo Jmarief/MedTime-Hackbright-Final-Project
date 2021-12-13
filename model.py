@@ -1,8 +1,17 @@
 """Models for MedTime Tracker and Reminder app"""
+from enum import Enum
 
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
+
+
+class UoM(Enum):
+    mg = 1
+    g = 2
+    ml = 3
+    l = 4
+
 
 class User(db.Model):
     """Create a user object for each user"""
@@ -46,11 +55,12 @@ class User_Medications(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     medication_id = db.Column(db.Integer, db.ForeignKey('medications.medication_id'))
     dosage = db.Column(db.Integer, nullable=False)
+    uom = db.Column(db.SmallInteger, nullable=False)
     frequency_per_day = db.Column(db.Integer, nullable=True)
 
     user = db.relationship('User', backref='user_medications')
     medication = db.relationship('Medications', backref='user_medications')
-    
+
     def __repr__(self):
         return f"<User_Medications user_medications_id={self.user_medication_id}, dosage={self.dosage}, frequency_per_day={self.frequency_per_day}>"
 
@@ -75,8 +85,7 @@ class Reminders(db.Model):
         return f"<Reminders reminders_id{self.reminders_id} dosage={self.dosage} frequency_per_day={self.frequency_per_day} scheduled_date={self.scheduled_date} scheduled_time={self.scheduled_time} refills={self.refills}>"
 
 
-def connect_to_db(flask_app, db_uri='postgresql://postgres:Q1w2e3r4t5y6!@localhost:5432/medtime', echo=False):
-    flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
+def connect_to_db(flask_app, db_uri='postgresql:///medtime', echo=False):    flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     flask_app.config['SQLALCHEMY_ECHO'] = echo
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = flask_app
@@ -84,6 +93,8 @@ def connect_to_db(flask_app, db_uri='postgresql://postgres:Q1w2e3r4t5y6!@localho
 
     print('Connected to the db!')
 
+
 if __name__ == '__main__':
     from server import app
+
     connect_to_db(app)
